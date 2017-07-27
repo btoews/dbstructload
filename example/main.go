@@ -30,14 +30,14 @@ func findUsersByLoginWithEmail(logins ...string) ([]*User, error) {
 		SELECT
 			users.id            AS User_id,
 			users.login         AS User_login,
-      user_emails.id      AS UserEmail_id,
-      user_emails.user_id AS UserEmail_user_id,
-      user_emails.email   AS UserEmail_email,
+			user_emails.id      AS UserEmail_id,
+			user_emails.user_id AS UserEmail_user_id,
+			user_emails.email   AS UserEmail_email,
 		FROM users
-    JOIN user_emails
-      ON user_emails.user_id = users.id
+		JOIN user_emails
+			ON user_emails.user_id = users.id
 		WHERE login=?;
-  `
+	`
 
 	// Allocate space, assuming a user with every login exists.
 	users := make([]*User, 0, len(logins))
