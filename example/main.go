@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/mastahyeti/model"
+	"github.com/mastahyeti/dbstructload"
 )
 
 var (
@@ -48,7 +48,7 @@ func findUsersByLoginWithEmail(logins ...string) ([]*User, error) {
 		queryArgs[i] = logins[i]
 	}
 
-	rows, err := model.Query(db, query, queryArgs)
+	rows, err := dbstructload.Query(db, query, queryArgs)
 	if err != nil {
 		return nil, err
 	}

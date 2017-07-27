@@ -1,4 +1,4 @@
-package model
+package dbstructload
 
 import (
 	"database/sql"
@@ -19,8 +19,7 @@ var (
 	ErrMissingField = errors.New("no provided structs contain field matching column")
 )
 
-// Rows is a wrapper around *sql.Rows that loads query results into model
-// structs.
+// Rows is a wrapper around *sql.Rows that loads query results into structs.
 type Rows struct {
 	*sql.Rows
 }
@@ -31,7 +30,7 @@ func Query(db *sql.DB, query string, args ...interface{}) (*Rows, error) {
 	return &Rows{sqlRows}, err
 }
 
-// Load loads the current row into the provided model structs.
+// Load loads the current row into the provided structs.
 func (r *Rows) Load(destStructs ...interface{}) error {
 	cols, err := r.Columns()
 	if err != nil {
