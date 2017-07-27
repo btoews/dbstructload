@@ -57,7 +57,7 @@ func findUsersByLoginWithEmail(logins ...string) ([]*User, error) {
 		user := User{}
 		user.Email = &UserEmail{}
 
-		if err = rows.Scan(&user, user.Email); err != nil {
+		if err = rows.Load(&user, user.Email); err != nil {
 			return users, err
 		}
 
